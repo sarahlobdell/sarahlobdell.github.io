@@ -37,7 +37,7 @@ That was fun. Yay. Here's another quote, because I can't get enough of this guy.
 ```{python}
 import re
 
-string1="13 year olds are the meanest people in the world. They terrify me to this because 8th graders will make fun of you but in an accurate way. They will get to the thing that you don’t like about you."
+string1="13 year olds are the meanest people in the world. They terrify me to this because eighth graders will make fun of you but in an accurate way. They will get to the thing that you don’t like about you."
 
 
 numbers = re.findall(r'\d+', string1)

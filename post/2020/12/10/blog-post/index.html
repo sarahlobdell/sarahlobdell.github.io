@@ -90,12 +90,12 @@ print(r.JohnMulaney,OnceSaid)</code></pre>
 <p>That was fun. Yay. Here's another quote, because I can't get enough of this guy. We're going to pull out the age of children he's scared of using some regex.</p>
 <pre class="python"><code>import re
 
-string1=&quot;13 year olds are the meanest people in the world. They terrify me to this because 8th graders will make fun of you but in an accurate way. They will get to the thing that you don’t like about you.&quot;
+string1=&quot;13 year olds are the meanest people in the world. They terrify me to this because eighth graders will make fun of you but in an accurate way. They will get to the thing that you don’t like about you.&quot;
 
 
 numbers = re.findall(r&#39;\d+&#39;, string1)
 numbers</code></pre>
-<pre><code>## [&#39;13&#39;, &#39;8&#39;]</code></pre>
+<pre><code>## [&#39;13&#39;]</code></pre>
 </div>
 </div>
 
