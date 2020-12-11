@@ -1,5 +1,5 @@
 ---
-title: Blog Post
+title: R and Python together
 author: ''
 date: '2020-12-10'
 slug: blog-post
@@ -8,13 +8,25 @@ tags: []
 description: ''
 ---
 
-# heading of my post
+# Real life R and Python situations 
 
-content of my post
+<center>
+![](/post/2020-12-10-blog-post_files/maxresdefault.jpg){width=75% height=75%}
+</center> 
 
-## subheading 
+John Mulaney once said "College was like a four-year game show called 'Do my friends hate me or do I just need to go to sleep?'"" I now understand why he said this. 
 
-more content 
+## More wise words using R and Python 
+
+ 
 ```{r}
-hist(quakes$mag)
+library(reticulate)
+JohnMulaney<-"We started chanting McDonalds McDonalds!"
 ```
+
+
+```{python}
+OnceSaid="And my dad pulled into the drive thru, and we started cheering and then he ordered one black coffee for himself and kept driving"
+print(r.JohnMulaney,OnceSaid)
+```
+

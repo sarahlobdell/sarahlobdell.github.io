@@ -8,14 +8,13 @@
     <language>en-US</language>
     <lastBuildDate>Thu, 10 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Blog Post</title>
+      <title>R and Python together</title>
       <link>/post/2020/12/10/blog-post/</link>
       <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/2020/12/10/blog-post/</guid>
-      <description> heading of my post content of my post
-subheading more content
-hist(quakes$mag)   </description>
+      <description>Real life R and Python situations   John Mulaney once said &amp;quot;College was like a four-year game show called &#39;Do my friends hate me or do I just need to go to sleep?&#39;&amp;quot;&amp;quot; I now understand why he said this.
+More wise words using R and Python library(reticulate) JohnMulaney&amp;lt;-&amp;quot;We started chanting McDonalds McDonalds!&amp;quot; OnceSaid=&amp;quot;And my dad pulled into the drive thru, and we started cheering and then he ordered one black coffee for himself and kept driving&amp;quot; print(r.</description>
     </item>
     
     <item>
