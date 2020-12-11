@@ -1,0 +1,178 @@
+---
+title: "Project 1: Exploratory Data Analysis"
+author: "Sarah Lobdell"
+date: "12/11/2020"
+output: html_document
+---
+
+```{r global_options, include=FALSE}
+#DO NOT EDIT THIS CHUNK OR ANYTHING ABOVE IT!
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, fig.align = "center", warning = F, message = F, tidy=T, tidy.opts=list(width.cutoff=50), R.options=list(max.print=100,dplyr.print_max=100))
+```
+
+## Sarah Lobdell spl576
+
+### Introduction
+
+*The data sets I chose were "USArrests" and "state_info." The sets were acquired via the "fivethirtyeight" package in RStudio using install.packages("fivethirtyeight"). USArrests gives statistics of crime rates in each state. The variables include murder, assault, and rape which are per 100,000 and UrbanPop which is the percent urban population per state. The state_info dataset gives each state, the states abbreviation, division, and region.*
+*I chose these data sets, because the United States is experiencing an increase in violence as of recent years. In this data analysis, I expect to see the relationships between regions and divisions and the number of murders and assaults.* 
+
+```{R}
+library(fivethirtyeight)
+data("USArrests")
+head(USArrests)
+data("state_info")
+head(state_info)
+```
+
+### Joining/Merging 
+
+#### Since USArrests did not have a column for states (instead it had row names), I added the name "state" for the first column in order to combine the datasets. I then did an inner join on the two datasets to combine them by the common variable "state."  
+
+```{r}
+library(dplyr)
+USArrests <- tibble::rownames_to_column(USArrests, var = "state")
+mydata <- inner_join(USArrests, state_info, by="state")
+```
+
+*I chose to do an inner join, because District of Columbia was included as a state in the state_info dataset making the state_info set have 51 states instead of 50 like USArrests. However, there was no corresponding data in the USArrests dataset. An inner join drops any row in either dataset without a match and keeps only the rows with a match in both sets without introducing any Nas. This could possibly impact how crime rate in each region is accurately depicted, since it is missing data from a region in the South.*
+
+### Tidying
+####I first used install.packages("tidyverse") to install the packages needed for pivoting.
+```{r}
+library(tidyr)
+tidydata <-mydata %>% pivot_wider(names_from=region, values_from=region)
+glimpse(tidydata)
+```
+*I decided to pivot_wider first, to see each region individually, however, it seemed unnecessary. Therefore, I decided to use my original data joined set for the remainder of the project.*
+
+### Wrangling 
+
+#### Below, the dplyr functions were used to manipulate and explore the new joined data set. 
+```{r}
+mydata %>% filter(Assault > median(Assault)) %>% select(state, Assault, region) %>% arrange(Assault)
+```
+
+```{r}
+mydata %>% mutate(avg_assaults_per_pop = (100000/Assault)/(UrbanPop/100))
+```
+
+```{r}
+mydata %>%
+  group_by(region) %>%
+  summarize(mean_assault=mean(Assault,na.rm=T), sd_assault=sd(Assault, na.rm=T))
+```
+#### All numeric variables were summarized overall: 
+*I installed install.packages("kableExtra") to create tables for each summary.*
+```{r}
+library(kableExtra)
+mydata %>% summarize(mean_assault=mean(Assault), sd_assault=sd(Assault), var_assault=var(Assault), min_assault=min(Assault), max_assault=max(Assault), mean_murder=mean(Murder), sd_murder=sd(Murder), var_murder=var(Murder), min_murder=min(Murder), max_murder=max(Murder), mean_urban=mean(UrbanPop), sd_urban=sd(UrbanPop), var_urban=var(UrbanPop), min_urban=min(UrbanPop), max_urban=max(UrbanPop), mean_rape=mean(Rape), sd_rape=sd(Rape), var_rape=var(Rape), min_rape=min(Rape), max_rape=max(Rape)) %>% kbl()%>% kable_classic(full_width = F, html_font = "Cambria")
+```
+
+#### All numeric variables were summarized and grouped by region only: 
+```{r}
+library(kableExtra)
+mydata %>% group_by(region) %>% summarize(mean_assault=mean(Assault), sd_assault=sd(Assault), var_assault=var(Assault), min_assault=min(Assault), max_assault=max(Assault), mean_murder=mean(Murder), sd_murder=sd(Murder), var_murder=var(Murder), min_murder=min(Murder), max_murder=max(Murder), mean_urban=mean(UrbanPop), sd_urban=sd(UrbanPop), var_urban=var(UrbanPop), min_urban=min(UrbanPop), max_urban=max(UrbanPop), mean_rape=mean(Rape), sd_rape=sd(Rape), var_rape=var(Rape), min_rape=min(Rape), max_rape=max(Rape)) %>% kbl()%>% kable_classic(full_width = F, html_font = "Cambria")
+
+```
+
+#### The numeric variables were grouped by both region and division: 
+```{r}
+library(kableExtra)
+mydata %>% group_by(region, division) %>% summarize(mean_assault=mean(Assault), sd_assault=sd(Assault), var_assault=var(Assault), min_assault=min(Assault), max_assault=max(Assault), mean_murder=mean(Murder), sd_murder=sd(Murder), var_murder=var(Murder), min_murder=min(Murder), max_murder=max(Murder), mean_urban=mean(UrbanPop), sd_urban=sd(UrbanPop), var_urban=var(UrbanPop), min_urban=min(UrbanPop), max_urban=max(UrbanPop), mean_rape=mean(Rape), sd_rape=sd(Rape), var_rape=var(Rape), min_rape=min(Rape), max_rape=max(Rape)) %>% kbl() %>% kable_classic(full_width = F, html_font = "Cambria")
+
+```
+*First, I used filter() to return assaults that were greater than the median number of assaults per state. I then used select() to choose the variables I wanted to look more closely at, which were state, assault, and region. Lastly, I arranged it by assault to sort the data from least-to-greatest by number of assaults per 100,000 people. I then found the number of assaults as a function of the urban population using mutate. In mutate(), I accounted for the number of assaults per 100000 by dividing 100000 by assaults, then divided that number by the percentage of urban population found by dividing the percent by 100. Using group_by() and summarize(), I found the mean number of assaults per each region. I further explored the data set by grouping by region and finding the mean and standard deviation of assaults.*
+*All numeric variables were summarized. Mean, standard deviation, variance, minimum and maximum were found for all numeric variables, renamed and put into a table using kable. Using the same summary statistics, I grouped by region which was also put into a table, then by both region and division. Each table was used and modified using kable to further organize the data.*
+
+### Visualizing 
+####I installed  the following packages using the code given: install.packages("tidyverse"),install.packages("ggplot2"),install.packages("ggcorrplot") to create a correlation heat map. 
+
+```{r}
+library(ggcorrplot)
+mapdata <- mydata[,c(2,3,4,5)]
+corr <- round(cor(mapdata), 1)
+ggcorrplot(corr, hc.order = TRUE, type = "lower",
+           lab = TRUE)
+```
+*I first created a new vector called "corr" in order to create the correlation heatmap. This included by 4 variables, murder, rape, assault, and urban population. I then used the ggcorrplot to create the correlation heatmap. This map shows how related each numeric variable is to one another. For example, assault and murder have a 0.8 correlation which is a very strong relationship with one another. This means assault and murder are likely to happen together. However, murder and urban population have the lowest correlation of 0.10. This implies that murder is mostly independent from the urban population.*
+
+
+####A bar graph was made to show the number of murders in each division colored by the region each division is in. 
+```{r}
+ggplot(mydata, aes(x = division, y = Murder, fill=region))+
+  geom_bar(stat="summary", fun=mean)+geom_errorbar(stat="summary",fun.data=mean_se)+ ggtitle("Murder in each Division (colored by region)")+ labs(y="Murder", x="Division") + theme(axis.text.x = element_text(angle = 45))
+```
+*A bar graph was created to compare each divisions average number of murders. This was further separated by coloring the divisions by the region in which it belongs to. We can see that murders happen at a higher rate in Southern regions. The next highest murders happen in the West and are equally as likely to happen in both divisions. However, in both the Midwest and Northeast regions, divisions are very different and murders are more likely to happen in one more so than the other. For example for the Midwest region, murders occur more in East North Central vs the South Atlantic. The same goes for the Northeast, as East South Central has a greater murder rate than the Mountains.*
+*In terms of the graph itself, the labels were turned on the x-axis in order to fit in the spaces provided. *
+
+#### Murder as a function of urban population was graphed. 
+```{r}
+ggplot(data = mydata, aes(x=UrbanPop, y=Murder, color = division)) + geom_smooth(method = "lm", se = FALSE) + geom_point(color="white") + ggtitle("Murder based on Urban Population (colored by division")+ labs(y="Murder", x="Urban Population") +scale_y_continuous(breaks = seq(0,20, by = 2))+ theme(axis.text.y = element_text(angle = 30))+ facet_wrap(~region)
+```
+*Murder was shown as a function of urban population. This was done by creating a scatterplot then using a linear regression model. Each division is shown as a different color. The divisions were then used in facet_wrap to separate each into varying regions.* 
+
+*As a function of urban population, we can see that the strongest linear predictor for murder is in the Midwest, since this region has the steepest line being the East North Central. As shown, the Midwest is the only region that is consistent with its linear predictions as both are positive. Both the West and South regions have divisions that urban population is not a reliable linear predictor for murder, as they have negative slopes. However, the Northeast does seem to also have a strong linear predictor as both are slightly increasing. * 
+
+### Dimensionality Reduction 
+
+#### Number of k
+```{r}
+library(cluster)
+pam_dat<-mydata%>%select(Murder, Assault, Rape, UrbanPop)
+sil_width<-vector()
+for(i in 2:10){
+  pam_fit <- pam(pam_dat, k = i)
+  sil_width[i] <- pam_fit$silinfo$avg.width
+}
+ggplot()+geom_line(aes(x=1:10,y=sil_width))+scale_x_continuous(name="k",breaks=1:10)
+```
+*I picked k=2 because it had the largest silhouette width. This ensured the best fit for the clusters.*
+
+
+#### Cluster Analysis 
+```{r}
+pam1 <- mydata %>% select_if(is.numeric) %>% scale %>% pam(k=2)
+pam1
+```
+
+####Visualize Clusters
+*I installed the following packages in order to use plotly: install.packages("devtools") install.packages("plotly) devtools::install_github("ropensci/plotly").*
+```{r}
+pamclust<-pam_dat %>% mutate(cluster=as.factor(pam1$clustering))
+library(plotly)
+pamclust %>%plot_ly(x= ~Murder,  y = ~Assault, z = ~Rape, color= ~cluster,
+        type = "scatter3d", mode = "markers") %>%
+  layout(autosize = F, width = 900, height = 400)
+```
+
+*The 3D scatterplot visualizes murder, rape, and assault based on 4 variables.* 
+
+###Visualize all pairwise combinations of the 4 variables. 
+#### To do this, I first used installed the GGally package using install.packages("GGally"). 
+```{r}
+library(GGally)
+ggpairs(pamclust, columns=1:4, aes(color=cluster))
+```
+
+*The above plots visualize the correlations between each variable based on clusters of the 4 variables.*
+
+#### Interpret Clusters
+```{r}
+pamclust %>% group_by(cluster) %>% summarize_if(is.numeric,mean,na.rm=T)
+mydata%>%slice(pam1$id.med)
+```
+
+*I summarized the clusters by their means for each variable using group_by and summarize. I then found the final medoids with slice(). This shows that New Mexico and Nebraska are most representative for their respective clusters.*
+
+
+#### Goodness of Fit 
+```{r}
+plot(pam1,which=2)
+```
+
+*The goodness of fit is relatively weak and could be artificial. This was found by using the average silhouette width of 0.41 and comparing it to the extablished values of goodness of fit.*
+
+
+
+

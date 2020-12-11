@@ -1,0 +1,20 @@
+---
+title: Blog Post
+author: ''
+date: '2020-12-10'
+slug: blog-post
+categories: []
+tags: []
+description: ''
+---
+
+# heading of my post
+
+content of my post
+
+## subheading 
+
+more content 
+```{r}
+hist(quakes$mag)
+```
