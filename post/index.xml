@@ -13,8 +13,8 @@
       <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/2020/12/10/blog-post/</guid>
-      <description>Real life R and Python situations   John Mulaney once said &amp;quot;College was like a four-year game show called &#39;Do my friends hate me or do I just need to go to sleep?&#39;&amp;quot;&amp;quot; I now understand why he said this.
-More wise words using R and Python library(reticulate) JohnMulaney&amp;lt;-&amp;quot;We started chanting McDonalds McDonalds!&amp;quot; OnceSaid=&amp;quot;And my dad pulled into the drive thru, and we started cheering and then he ordered one black coffee for himself and kept driving&amp;quot; print(r.</description>
+      <description>R and Python   John Mulaney once said &amp;quot;College was like a four-year game show called &#39;Do my friends hate me or do I just need to go to sleep?&#39;&amp;quot; I now understand why he said this.
+More wise words using R and Python Reticulate is a package that allows R and Python to work with one another. So first we load the package in an R chunk and create a vector for the first portion of our lifechanging quotation.</description>
     </item>
     
   </channel>

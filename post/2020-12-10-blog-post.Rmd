@@ -8,25 +8,40 @@ tags: []
 description: ''
 ---
 
-# Real life R and Python situations 
+# R and Python 
 
 <center>
 ![](/post/2020-12-10-blog-post_files/maxresdefault.jpg){width=75% height=75%}
 </center> 
 
-John Mulaney once said "College was like a four-year game show called 'Do my friends hate me or do I just need to go to sleep?'"" I now understand why he said this. 
+John Mulaney once said "College was like a four-year game show called 'Do my friends hate me or do I just need to go to sleep?'" I now understand why he said this. 
 
 ## More wise words using R and Python 
 
- 
+Reticulate is a package that allows R and Python to work with one another. So first we load the package in an R chunk and create a vector for the first portion of our lifechanging quotation. We name it JohnMulaney. 
+
 ```{r}
 library(reticulate)
 JohnMulaney<-"We started chanting McDonalds McDonalds!"
 ```
 
+Then, because we want to show off that we know how to ~code~, we add a python chunk. It's a quote so, we print out JohnMulaney,OnceSaid, because one time John Mulaney said this. 
 
 ```{python}
 OnceSaid="And my dad pulled into the drive thru, and we started cheering and then he ordered one black coffee for himself and kept driving"
 print(r.JohnMulaney,OnceSaid)
 ```
+
+That was fun. Yay. Here's another quote, because I can't get enough of this guy. We're going to pull out the age of children he's scared of using some regex. 
+
+```{python}
+import re
+
+string1="13 year olds are the meanest people in the world. They terrify me to this because 8th graders will make fun of you but in an accurate way. They will get to the thing that you don’t like about you."
+
+
+numbers = re.findall(r'\d+', string1)
+numbers
+```
+
 

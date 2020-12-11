@@ -72,19 +72,30 @@
               
 
 
-<div id="real-life-r-and-python-situations" class="section level1">
-<h1>Real life R and Python situations</h1>
+<div id="r-and-python" class="section level1">
+<h1>R and Python</h1>
 <center>
 <img src="../../../../../post/2020-12-10-blog-post_files/maxresdefault.jpg" style="width:75.0%" style="height:75.0%" />
 </center>
-<p>John Mulaney once said &quot;College was like a four-year game show called 'Do my friends hate me or do I just need to go to sleep?'&quot;&quot; I now understand why he said this.</p>
+<p>John Mulaney once said &quot;College was like a four-year game show called 'Do my friends hate me or do I just need to go to sleep?'&quot; I now understand why he said this.</p>
 <div id="more-wise-words-using-r-and-python" class="section level2">
 <h2>More wise words using R and Python</h2>
+<p>Reticulate is a package that allows R and Python to work with one another. So first we load the package in an R chunk and create a vector for the first portion of our lifechanging quotation. We name it JohnMulaney.</p>
 <pre class="r"><code>library(reticulate)
 JohnMulaney&lt;-&quot;We started chanting McDonalds McDonalds!&quot;</code></pre>
+<p>Then, because we want to show off that we know how to <sub>code</sub>, we add a python chunk. It's a quote so, we print out JohnMulaney,OnceSaid, because one time John Mulaney said this.</p>
 <pre class="python"><code>OnceSaid=&quot;And my dad pulled into the drive thru, and we started cheering and then he ordered one black coffee for himself and kept driving&quot;
 print(r.JohnMulaney,OnceSaid)</code></pre>
 <pre><code>## We started chanting McDonalds McDonalds! And my dad pulled into the drive thru, and we started cheering and then he ordered one black coffee for himself and kept driving</code></pre>
+<p>That was fun. Yay. Here's another quote, because I can't get enough of this guy. We're going to pull out the age of children he's scared of using some regex.</p>
+<pre class="python"><code>import re
+
+string1=&quot;13 year olds are the meanest people in the world. They terrify me to this because 8th graders will make fun of you but in an accurate way. They will get to the thing that you don’t like about you.&quot;
+
+
+numbers = re.findall(r&#39;\d+&#39;, string1)
+numbers</code></pre>
+<pre><code>## [&#39;13&#39;, &#39;8&#39;]</code></pre>
 </div>
 </div>
 
