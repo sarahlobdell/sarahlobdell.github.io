@@ -20,7 +20,7 @@ More wise words using R and Python Reticulate is a package that allows R and Pyt
     <item>
       <title>Project 1: Exploratory Data Analysis</title>
       <link>/project/project1/</link>
-      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/project/project1/</guid>
       <description>Sarah Lobdell spl576 Introduction The data sets I chose were &amp;quot;USArrests&amp;quot; and &amp;quot;state_info.&amp;quot; The sets were acquired via the &amp;quot;fivethirtyeight&amp;quot; package in RStudio using install.packages(&amp;quot;fivethirtyeight&amp;quot;). USArrests gives statistics of crime rates in each state. The variables include murder, assault, and rape which are per 100,000 and UrbanPop which is the percent urban population per state. The state_info dataset gives each state, the states abbreviation, division, and region.</description>
@@ -29,7 +29,7 @@ More wise words using R and Python Reticulate is a package that allows R and Pyt
     <item>
       <title>Project 2: Modeling, Testing, and Predicting</title>
       <link>/project/project2/</link>
-      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/project/project2/</guid>
       <description>Sarah Lobdell spl576 Introduction The dataset I chose is called &amp;quot;Affairs.&amp;quot; This dataset has information based on infidelity data collected from a survey carried out by Psychology Today in 1969. The data has 601 observations on 9 variables. The 9 variables include affairs, gender, age, years married, children, religiousness, education, occupation, and rating. Affairs is numeric in which an entry of 0 means there were no extramarital affairs, whereas any number greater has had at least 1 affair.</description>
@@ -38,7 +38,7 @@ More wise words using R and Python Reticulate is a package that allows R and Pyt
     <item>
       <title>Projects</title>
       <link>/projects/</link>
-      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/projects/</guid>
       <description> Here are some of my coding projects below:
@@ -50,7 +50,7 @@ More wise words using R and Python Reticulate is a package that allows R and Pyt
     <item>
       <title>Resume</title>
       <link>/resume/</link>
-      <pubDate>Fri, 11 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 10 Dec 2020 00:00:00 +0000</pubDate>
       
       <guid>/resume/</guid>
       <description>    </description>
